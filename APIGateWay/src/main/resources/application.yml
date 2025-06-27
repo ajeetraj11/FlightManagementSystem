@@ -1,0 +1,106 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: flight-service
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/flights/**
+          filters:
+            - AuthenticationFilter
+
+        - id: admin-booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/admin/bookings/**
+          filters:
+            - AuthenticationFilter
+
+        - id: flight-admin-service
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/admin/flight/**
+          filters:
+            - AuthenticationFilter
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        - id: admin-user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/admin/detail/**
+          filters:
+            - AuthenticationFilter
+
+        - id: user-service-user
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - AuthenticationFilter
+
+        - id: booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/bookings/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: checkin-service
+          uri: lb://CHECKIN-SERVICE
+          predicates:
+            - Path=/checkin/**
+          filters:
+            - AuthenticationFilter
+
+        - id: search-service
+          uri: lb://SEARCH-SERVICE
+          predicates:
+            - Path=/search/**
+          filters:
+            - AuthenticationFilter
+
+        - id: passenger-service-admin
+          uri: lb://PASSENGER-SERVICE
+          predicates:
+            - Path=/passenger/admin/**
+          filters:
+            - AuthenticationFilter
+
+        - id: passenger-service
+          uri: lb://PASSENGER-SERVICE
+          predicates:
+            - Path=/passenger/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payments/**
+          filters:
+            - AuthenticationFilter
+
+        - id: admin-payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/admin/payment/**
+          filters:
+            - AuthenticationFilter
+
+
+
+
+
+  application:
+    name: API-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
